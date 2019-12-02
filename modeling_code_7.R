@@ -5,7 +5,32 @@ cdm <-read.csv("e:/Modeling17.csv",header = TRUE, strip.white = TRUE)
 ##cdm <- cdm[cdm$Q407 !=17,]
 ####cdm <- cdm[cdm$AGE2 !=84,]
 
+#transform data set
+cdm <- sapply(cdm, as.factor)
+cdm <- as.data.frame(cdm)
 
+#check the missing values
+mean(!complete.cases(cdm))
+Missingvalues <- colSums(is.na(cdm))
+barplot(Missingvalues)
+Missingratio <- data.frame(colSums(is.na(cdm))/nrow(cdm))
+Missingratio
+
+#visualize the missing value
+#library(mice)
+#library("VIM")
+#md.pattern(cdm, plot = TRUE)
+#aggr(cdm, prop=TRUE, numbers=TRUE)
+
+##marginplot(cdm[c("NumberofChildren","Region")],pch=c(20),col=c("darkgray","red","blue"))
+                         
+#impute missing values
+#library(DMwR)
+#cdm <- centralImputation(cdm)
+#mean(!complete.cases(cdm))
+#Missingvalues1 <- colSums(is.na(cdm))
+#Missingratio1 <- data.frame(colSums(is.na(cdm))/nrow(cdm))
+#aggr(cdm, prop=TRUE, numbers=TRUE)
 
 #tansform NEWBUYER2 variable
 ##cdm$NEWBUYER2 <- ifelse(cdm$NEWBUYER2==1,1,0)
